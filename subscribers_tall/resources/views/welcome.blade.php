@@ -1,5 +1,8 @@
 <x-guest-layout>
-    <div class="flex flex-col bg-gradient-to-r from-[#3b41c5] via-[#a981bb] to-[#ffc8a9] w-full h-screen">
+    <div class="flex flex-col bg-gradient-to-r from-[#3b41c5] via-[#a981bb] to-[#ffc8a9] w-full h-screen"
+        x-data="{
+            isOpenModal: false,
+        }">
         <nav class="flex pt-5 justify-between container mx-auto text-pink-100">
             <a class="text-3xl font-bold" href="/">
                 <x-application-logo class="w-16 h-16 fill-white">
@@ -21,24 +24,30 @@
                 <p class="text-indigo-300 text-xl mb-5">
                     This page was made with TALL Stack.
                 </p>
-                <x-primary-button class="bg-red-400 hover:bg-red-500 py-4">
+                <x-primary-button class="bg-red-400 hover:bg-red-500 py-4"
+                                  x-on:click="isOpenModal = true">
                     Subscribe
                 </x-primary-button>
             </div>
         </div>
-    </div>
-    <div class="flex flex-col bg-gradient-to-r from-[#3b41c5] via-[#a981bb] to-[#ffc8a9] w-full h-screen">
-        <p class="text-white text-5xl font-extrabold text-center">
-            Let's get in touch!
-        </p>
-        <form class="flex flex-col items-center mt-5">
-            <x-text-input class="px-5 py-3 w-80 border border-blue-400" type="email" name="email"
-                placeholder="Email address">
-            </x-text-input>
-            <span class="text-gray-100 mt-1 text-xs">You will receive a confirmation email.</span>
-            <x-primary-button class="px-5 py-5 w-80 justify-center mt-5 bg-red-400 hover:bg-red-500">
-                Let me in !!!
-            </x-primary-button>
-        </form>
+        <div class="flex fixed top-0 bg-gray-900 bg-opacity-60 items-center w-full h-screen"
+        x-show="isOpenModal"
+        x-on:click.self="isOpenModal = false"
+        x-on:keydown.escape.window="isOpenModal = false"> <!--Modal Start-->
+            <div class="bg-gradient-to-r from-[#ffc8a9] via-[#a981bb] to-[#3b41c5] mx-auto shadow-2xl rounded-xl p-8">
+                <p class="text-white text-5xl font-extrabold text-center">
+                    Let's get in touch!
+                </p>
+                <form class="flex flex-col items-center mt-5">
+                    <x-text-input class="px-5 py-3 w-80 border border-blue-400" type="email" name="email"
+                        placeholder="Email address">
+                    </x-text-input>
+                    <span class="text-gray-100 mt-1 text-xs">You will receive a confirmation email.</span>
+                    <x-primary-button class="px-5 py-5 w-80 justify-center mt-5 bg-red-400 hover:bg-red-500">
+                        Let me in !!!
+                    </x-primary-button>
+                </form>
+            </div>
+        </div> <!--Modal End -->
     </div>
 </x-guest-layout>
