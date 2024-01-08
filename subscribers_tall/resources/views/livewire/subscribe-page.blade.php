@@ -45,7 +45,12 @@
                           placeholder="Email address" 
                           wire:model='email'>
             </x-text-input>
-            <span class="text-gray-100 mt-1 text-xs">You will receive a confirmation email.</span>
+            <span class="text-gray-100 mt-1 text-xs">
+                {{ $errors->has('email') ? 
+                   $errors->first('email') : 
+                   'You will receive a confirmation email.' 
+                }}
+            </span>
             <x-primary-button class="px-5 py-5 w-80 justify-center mt-5 bg-red-400 hover:bg-red-500">
                 Let me in !!!
             </x-primary-button>

@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <livewire:landing-page>
+    <livewire:subscribe-page>
 
-    </livewire:landing-page>
+    </livewire:subscribe-page>
 </x-guest-layout>
