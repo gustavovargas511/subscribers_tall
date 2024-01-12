@@ -14,7 +14,7 @@ class LandingPage extends Component
     public function subscribe(){
         //\Log::debug($this->email);
         $subscriber = Subscriber::create([
-            'email' => $this.email,
+            'email' => $this->email,
         ]);
     }
 
