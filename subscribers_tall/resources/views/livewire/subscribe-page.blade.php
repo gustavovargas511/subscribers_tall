@@ -1,8 +1,8 @@
 <div class="flex flex-col bg-gradient-to-r from-[#3b41c5] via-[#a981bb] to-[#ffc8a9] w-full h-screen"
      x-data="{
-        isOpenModal: false,
-        showSuccess: false,
-}">
+        isOpenModal: @entangle('isOpenModal').live,
+        showSuccess: @entangle('showSuccess').live,
+    }">
     <nav class="flex pt-5 justify-between container mx-auto text-pink-100">
         <a class="text-3xl font-bold" 
            href="/">
@@ -18,7 +18,7 @@
         </div>
     </nav>
     <div class="flex container mx-auto items-center h-full">
-        <div class="flex flex-col w-1/3 items-start">
+        <div class="flex flex-col w-1/3 items-start"> 
             <h1 class="text-pink-100 font-bold text-6xl leading-tight">
                 Subscribe!
             </h1>
@@ -43,7 +43,7 @@
                           type="email" 
                           name="email"
                           placeholder="Email address" 
-                          wire:model='email'>
+                          wire:model.live='email'>
             </x-text-input>
             <span class="text-gray-100 mt-1 text-xs">
                 {{ $errors->has('email') ? 
@@ -52,7 +52,15 @@
                 }}
             </span>
             <x-primary-button class="px-5 py-5 w-80 justify-center mt-5 bg-red-400 hover:bg-red-500">
-                Let me in !!!
+                <span class="animate-spin"
+                      wire:loading
+                      wire:target = 'subscribe'>
+                    &#9696;
+                </span>
+                <span wire:loading.remove
+                      wire:target = 'subscribe''>
+                    Let me in !!!
+                </span>
             </x-primary-button>
         </form>
     </x-modal2><!--Subscribe Modal End-->
@@ -62,8 +70,14 @@
         <p class="text-white animate-pulse text-9xl font-extrabold text-center">
             &check;
         </p>
-        <p class="text-white text-3xl font-extrabold text-center">
-            Mail sent!
-        </p>
+        @if (request()->has('verified') && request()->verified == 1)
+            <p class="text-white text-3xl font-extrabold text-center">
+                Thanks for confirming!
+            </p>            
+        @else
+            <p class="text-white text-3xl font-extrabold text-center">
+                Mail sent! <br> See you in your inbox!
+            </p>
+        @endif
     </x-modal2><!--SuccessModal Start-->
 </div>

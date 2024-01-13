@@ -6,15 +6,26 @@ use Livewire\Component;
 use App\Models\Subscriber;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Http\Request;
 use Illuminate\Auth\Notifications\VerifyEmail;
 
 class SubscribePage extends Component
 {
     public $email;
 
+    public $isOpenModal = false;
+
+    public $showSuccess = false;
+
     protected $rules = [
         'email'=>'required|email:filter|unique:subscribers,email',
     ];
+
+    public function mount(Request $request){
+        if ($request->has('verified') && $request->verified == 1) {
+            $this->showSuccess = true;
+        }
+    }
 
     public function subscribe(){
         
@@ -44,8 +55,14 @@ class SubscribePage extends Component
         
 
         $this->reset('email');
+        $this->isOpenModal = false;
+        $this->showSuccess = true;
 
     }
+
+
+
+
 
     public function render()
     {
