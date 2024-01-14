@@ -9,7 +9,11 @@ use Livewire\Component;
 class Subscribers extends Component
 {
 
-    public $search;
+    public $search = '';
+
+    protected $queryString = [
+        'search' => ['except' => '']
+    ];
 
     public function render()
     {
